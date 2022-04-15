@@ -152,7 +152,13 @@ linters.setup {
 }
 
 lvim.plugins = {
-  {"github/copilot.vim"}
+  {"github/copilot.vim"},
+  {
+    "Pocco81/AutoSave.nvim",
+    config = function()
+      require("autosave").setup()
+    end,
+  }
 }
 
 vim.g.copilot_no_tab_map = true
