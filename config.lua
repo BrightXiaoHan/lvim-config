@@ -123,6 +123,7 @@ formatters.setup {
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
   { command = "flake8", filetypes = { "python" } },
+  { command = "pydocstyle", filetypes = { "python" } },
   {
     -- each linter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
     command = "shellcheck",
@@ -155,7 +156,13 @@ lvim.plugins = {
   {"github/copilot.vim"},
   -- colorscheme
   {'shaeinst/roshnivim-cs'},
-  {'folke/tokyonight.nvim'}
+  {'folke/tokyonight.nvim'},
+  {
+    "Pocco81/AutoSave.nvim",
+    config = function()
+      require("autosave").setup()
+    end,
+  },
 }
 
 vim.g.copilot_no_tab_map = true
