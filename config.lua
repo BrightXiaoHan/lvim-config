@@ -11,7 +11,7 @@ an executable
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save = false
-lvim.colorscheme = "onedarker"
+lvim.colorscheme = "rvcs"
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
@@ -152,7 +152,10 @@ linters.setup {
 }
 
 lvim.plugins = {
-  {"github/copilot.vim"}
+  {"github/copilot.vim"},
+  -- colorscheme
+  {'shaeinst/roshnivim-cs'},
+  {'folke/tokyonight.nvim'}
 }
 
 vim.g.copilot_no_tab_map = true
