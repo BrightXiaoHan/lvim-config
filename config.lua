@@ -6,6 +6,16 @@ lvim.colorscheme = "rvcs"
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
+lvim.builtin.which_key.mappings["sP"] = {
+  "<cmd>Telescope projects<cr>", "Projects"
+}
+lvim.builtin.which_key.mappings["j"] = {
+  name = "Custom Command",
+  r = { "<cmd>MarkdownPreview<cr>", "MarkdownPreview" },
+  s = { "<cmd>:MarkdownPreviewStop<cr>", "MarkdownPreviewStop" },
+  d = { "<cmd>:DiffviewOpen<cr>", "DiffviewOpen" },
+  c = { "<cmd>:DiffviewClose<cr>", "DiffviewClose" },
+}
 
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
@@ -59,6 +69,25 @@ lvim.plugins = {
     "Pocco81/AutoSave.nvim",
     config = function()
       require("autosave").setup()
+    end,
+  },
+  {
+    "sindrets/diffview.nvim",
+    event = "BufRead",
+  },
+  {
+    "iamcco/markdown-preview.nvim",
+    run = "cd app && npm install",
+    ft = "markdown",
+    config = function()
+      vim.g.mkdp_auto_start = 1
+    end,
+  },
+  {
+    "nvim-telescope/telescope-project.nvim",
+    event = "BufWinEnter",
+    setup = function()
+      vim.cmd [[packadd telescope.nvim]]
     end,
   },
 }
