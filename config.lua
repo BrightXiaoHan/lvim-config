@@ -1,30 +1,27 @@
--- general
 lvim.log.level = "warn"
 lvim.format_on_save = false
-lvim.colorscheme = "rvcs"
+lvim.colorscheme = "onedarker"
+lvim.builtin.alpha.active = true
+lvim.builtin.alpha.mode = "dashboard"
+lvim.builtin.notify.active = true
+lvim.builtin.terminal.active = true
+lvim.builtin.nvimtree.setup.view.side = "left"
+lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
 
--- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
+vim.cmd("tnoremap <Esc> <C-\\><c-n>")
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
-lvim.builtin.which_key.mappings["sP"] = {
-  "<cmd>Telescope projects<cr>", "Projects"
-}
 lvim.builtin.which_key.mappings["j"] = {
   name = "Custom Command",
   r = { "<cmd>MarkdownPreview<cr>", "MarkdownPreview" },
   s = { "<cmd>:MarkdownPreviewStop<cr>", "MarkdownPreviewStop" },
   d = { "<cmd>:DiffviewOpen<cr>", "DiffviewOpen" },
   c = { "<cmd>:DiffviewClose<cr>", "DiffviewClose" },
+  p = { "<cmd>:Telescope projects<cr>", "Projects" },
+  t = { "<cmd>:ToggleTerm size=20 dir=git_dir direction=horizontal<cr>", "ToggleTerm Horizontal" },
+  T = { "<cmd>:ToggleTerm size=40 dir=git_dir direction=vertical<cr>", "ToggleTerm Vertical" },
 }
 
-lvim.builtin.alpha.active = true
-lvim.builtin.alpha.mode = "dashboard"
-lvim.builtin.notify.active = true
-lvim.builtin.terminal.active = true
-lvim.builtin.nvimtree.setup.view.side = "left"
-lvim.builtin.nvimtree.show_icons.git = 0
-
--- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
   "bash",
   "c",
@@ -61,15 +58,19 @@ linters.setup {
 }
 
 lvim.plugins = {
-  {"github/copilot.vim"},
   -- colorscheme
   {'shaeinst/roshnivim-cs'},
-  {'folke/tokyonight.nvim'},
   {
-    "Pocco81/AutoSave.nvim",
-    config = function()
-      require("autosave").setup()
-    end,
+    "sindrets/diffview.nvim",
+    event = "BufRead",
+  },
+  { "Pocco81/auto-save.nvim",
+      config = function()
+        require("auto-save").setup {
+          -- your config goes here
+	  -- or just leave it empty :)
+	}
+      end,
   },
   {
     "sindrets/diffview.nvim",
@@ -100,10 +101,9 @@ lvim.plugins = {
       end, 100)
     end,
   },
-
   { "zbirenbaum/copilot-cmp",
     after = { "copilot.lua", "nvim-cmp" },
-  },  
+  },
 }
 
 -- Can not be placed into the config method of the plugins.
